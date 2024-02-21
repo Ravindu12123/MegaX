@@ -206,14 +206,9 @@ async function loadMega(url) {
                  });
                }
              }
-           }
-
-
-           
+           }     
       }
-
-        
-      }
+     }
     }
     }
   }else{
