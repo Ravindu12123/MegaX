@@ -6,10 +6,7 @@ const express= require("express");
 const app = express();
 const axios= require("axios");
 const FormData=require("form-data");
-
 const BOT_TOKEN = process.env.token;
-
-
 File.defaultHandleRetries = (tries, error, cb) => {
   if (tries > 8) {
     // Give up after eight retries
@@ -19,6 +16,7 @@ File.defaultHandleRetries = (tries, error, cb) => {
     setTimeout(cb, 1000 * Math.pow(2, tries));
   }
 };
+
 
 function validateUrl(url){
   const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
@@ -199,6 +197,7 @@ async function loadMega(url) {
   console.log(obj.files.length+" of files founded!");
   await sendM(obj.files.length+" of files founded from "+url);
  await startS(obj);
+ return obj;
 }
 
 
@@ -263,6 +262,28 @@ app.get("/tg",(req,res)=>{
   }
 
 })
+
+app.get("/mega",async (req,res)=>{
+   if(req.query.url!=null){
+      var url=req.query.url;
+      if(validateUrl(url)){
+        cc=await loadMega(url);
+        cc.ok=true;
+        res.send(
+          JSON.stringify(cc)
+        );
+      }else{
+        res.send(
+          JSON.stringify({
+            ok:false,
+            m:"not valid url"
+          }));
+      }
+   }else{
+     res.send(JSON.stringify({ok:false,m:"no url"});
+   }
+});
+
 
 app.listen(3000,()=>{
   console.log("server started");
