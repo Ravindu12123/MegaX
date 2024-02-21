@@ -302,7 +302,7 @@ app.get("/tg",(req,res)=>{
 
 app.get("/sendF",async (req,res)=>{
    if(req.query.url!=null&&req.query.id!=null){
-      url=req.query.url;
+      url=req.query.url.replace("***","#");
       id=req.query.id;
       dalp=await dll(id,url);
     if(dalp!=null){
@@ -316,18 +316,18 @@ app.get("/sendF",async (req,res)=>{
         res.send(JSON.stringify({
             ok:true,
             m:"file was sent"
-             });
+             }));
       }else{
         res.send(JSON.stringify({
             ok:false,
             m:"file cant send"
-             });
+             }))
       }
     }else{
       res.send(JSON.stringify({
             ok:false,
             m:"file cant download"
-             });
+             }));
     }  
    }else{
       res.send(
