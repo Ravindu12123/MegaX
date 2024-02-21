@@ -335,7 +335,7 @@ app.get("/sendF",async (req,res)=>{
 
 })
 
-async function loadMeg2(url) {
+async function loadMega2(url) {
   exobj=await exUl(url);
   console.log(exobj);
   follf=url;
