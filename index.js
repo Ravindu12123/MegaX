@@ -11,7 +11,7 @@ const BOT_TOKEN = process.env.token;
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "*/*"
+    null
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
