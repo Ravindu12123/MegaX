@@ -351,7 +351,7 @@ app.get("/mega",async (req,res)=>{
           }));
       }
    }else{
-     res.send(JSON.stringify({ok:false,m:"no url"});
+     res.send(JSON.stringify({ok:false,m:"no url"}));
    }
 });
 
