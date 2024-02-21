@@ -336,7 +336,7 @@ app.get("/sendF",async (req,res)=>{
 
 app.get("/mega",async (req,res)=>{
    if(req.query.url!=null){
-      var url=req.query.url;
+      var url=req.query.url.replace("***","#");
       if(validateUrl(url)){
         cc=await loadMega(url);
         cc.ok=true;
