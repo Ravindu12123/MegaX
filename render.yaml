@@ -2,10 +2,9 @@ services:
   - type: web
     plan: free
     name: megaX
-    env: nodejs ^20.0.0
-    buildCommand: npm install
-    startCommand: npm start
-    repo:       
+    buildCommand: yarn install
+    startCommand: yarn start
+    repo:https://github.com/Ravindu12123/MegaX    
     branch: master
     envVars:
       - key: token
