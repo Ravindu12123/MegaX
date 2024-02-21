@@ -4,7 +4,7 @@ services:
     name: megaX
     buildCommand: yarn install
     startCommand: yarn start
-    repo:https://github.com/Ravindu12123/MegaX    
+    repo: https://github.com/Ravindu12123/MegaX    
     branch: master
     envVars:
       - key: token
