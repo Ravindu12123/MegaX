@@ -197,7 +197,7 @@ async function loadMega(url) {
     JSON.stringify(obj)
   );
   console.log(obj.files.length+" of files founded!");
-  sendM(obj.files.length+" of files founded from "+url);
+  await sendM(obj.files.length+" of files founded from "+url);
  await startS(obj);
 }
 
@@ -222,6 +222,10 @@ async function runner(){
     
   }
 }
+
+app.get("/run",(req,res)=>{
+  runner();
+})
 
 app.get("/tg",(req,res)=>{
   var url,pw;
@@ -262,9 +266,8 @@ app.get("/tg",(req,res)=>{
 
 app.listen(3000,()=>{
   console.log("server started");
-  //setTimeout(sendT,5000,path.join(__dirname,dlp,"q.mov"));
-  fs.writeFileSync("Task.json",JSON.stringify({task:[]}));
-  runner();
+   fs.writeFileSync("Task.json",JSON.stringify({task:[]}));
+  //runner();
   //https://mega.nz/folder/RPNFhYaC#XWhiKlEgR4BwCzrMQmqizw
   //loadMega();
 })
