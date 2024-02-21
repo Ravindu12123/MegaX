@@ -6,7 +6,7 @@ services:
     buildCommand: npm install
     startCommand: npm start
     repo: https://github.com/Ravindu12123/MegaX    
-    branch: master
+    branch: main
     envVars:
       - key: token
         sync: false
