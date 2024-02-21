@@ -320,7 +320,7 @@ app.post("/sendF",async (req,res)=>{
    if(typeof req.body=='string'){
       req.body=JSON.parse(req.body);
    }
-   if(req.body.url!=null&&req.query.id!=null){
+   if(req.body.url!=null&&req.body.id!=null){
       url=req.body.url;
       id=req.body.id;
       dalp=await dll(id,url);
