@@ -7,6 +7,26 @@ const app = express();
 const axios= require("axios");
 const FormData=require("form-data");
 const BOT_TOKEN = process.env.token;
+
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "*/*"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  
+
+  next();
+});
+
+
 File.defaultHandleRetries = (tries, error, cb) => {
   if (tries > 8) {
     // Give up after eight retries
