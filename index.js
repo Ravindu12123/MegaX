@@ -74,9 +74,46 @@ stream.on('progress', info => {
         ffpp
       ));   
   })
-  })
-    
+  }) 
 }
+
+
+async function dll(did,ull){
+  return new Promise(async (res,rej)=>{
+    fol = File.fromURL(ull+"/file/"+did);
+  await fol.loadAttributes(async (error, ff) => {
+    var ffpp=path.join(__dirname,dlp,ff.name);
+    Ff=ff;
+  console.log("doing: "+ff.name);
+  stream= ff.download();
+stream.on('progress', info => {
+  console.log('Loaded', info.bytesLoaded, 'bytes of', info.bytesTotal);
+  if(info.bytesLoaded==info.bytesTotal){
+    setTimeout(()=>{
+      let start = fs.statSync(ffpp).size;
+      if(start<info.bytesLoaded){
+      file.download({ start })
+  .pipe(fs.createWriteStream(ffpp, {
+    flags: 'r+', // <= set flags to prevent overwriting the file
+    start
+  }));
+      }else{
+        res(ffpp);
+        console.log("dd done");
+      }
+    },5000);
+  }
+});
+  stream.pipe(
+      fs.createWriteStream(
+        ffpp
+      ));   
+  })
+  }) 
+}
+
+
+
 async function sendT(file,res){
         const formData = new FormData();
         formData.append('chat_id', process.env.channel);
@@ -260,6 +297,45 @@ app.get("/tg",(req,res)=>{
       "missing url or password"
     );
   }
+
+})
+
+app.get("/sendF",async (req,res)=>{
+   if(req.query.url!=null&&req.query.id!=null){
+      url=req.query.url;
+      id=req.query.id;
+      dalp=await dll(id,url);
+    if(dalp!=null){
+      cv=await sendT(dalp);
+      console.log("send done "+cv);
+      if(cv){
+        fs
+          .unlinkSync(
+            path.resolve(nn));
+        console.log("deleted "+nn);
+        res.send(JSON.stringify({
+            ok:true,
+            m:"file was sent"
+             });
+      }else
+        res.send(JSON.stringify({
+            ok:false,
+            m:"file cant send"
+             });
+      }
+    }else{
+      res.send(JSON.stringify({
+            ok:false,
+            m:"file cant download"
+             });
+    }  
+   }else{
+      res.send(
+        JSON.stringify({
+          ok:false,
+          m:"cannot find parameters"
+        }));
+   }
 
 })
 
