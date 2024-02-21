@@ -296,10 +296,13 @@ app.get("/tg",(req,res)=>{
 
 })
 
-app.get("/sendF",async (req,res)=>{
-   if(req.query.url!=null&&req.query.id!=null){
-      url=req.query.url.replace("***","#");
-      id=req.query.id;
+app.post("/sendF",async (req,res)=>{
+   if(typeof req.body=='string'){
+      req.body=JSON.parse(req.body);
+   }
+   if(req.body.url!=null&&req.query.id!=null){
+      url=req.body.url;
+      id=req.body.id;
       dalp=await dll(id,url);
     if(dalp!=null){
       cv=await sendT(dalp);
