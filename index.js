@@ -233,6 +233,7 @@ async function loadMega(url) {
 }
 
 
+
 app.use(express.static("download"));
 app.get("/",(req,res)=>{
   res.send("Hello World");
@@ -334,11 +335,77 @@ app.get("/sendF",async (req,res)=>{
 
 })
 
+async function loadMeg2(url) {
+  exobj=await exUl(url);
+  console.log(exobj);
+  follf=url;
+  const folder = File.fromURL(url);
+  obj={files:[]};
+  await folder.loadAttributes();
+  if(folder.directory==true){
+    obj.folder=true;
+    obj.name=folder.name;
+    obj.url=url;
+      for (file of folder.children) {
+      console.log("doing: " + file.name);
+      if (file.directory == false) {
+        obj.files.push({
+          did:file.downloadId,
+          key:file.key,
+          name:file.name
+        });
+        console.log(
+          file.downloadId,
+          file.key
+        );
+      }else{
+      console.log("folder: "+file.name);
+      for(inf of file.children){
+          if(inf.directory == false){     
+            obj.files.push({
+            did:inf.downloadId,
+            key:inf.key,
+            name:inf.name
+            });
+         }else{
+          console.log("folder: "+inf.name);
+           for(iinf of inf.children){
+             if(iinf.directory == false){
+               //down f
+               if(iinf.key!=null){
+                 obj.files.push({
+                 did:iinf.downloadId,
+                 key:iinf.key,
+                 name:iinf.name
+                 });
+               }
+             }
+           }     
+      }
+     }
+    }
+    }
+  }else{
+    obj.folder=false;
+    obj.name=folder.name;
+    obj.url=url;
+    obj.files.push({
+      did:folder.downloadId,
+      key:folder.key,
+      name:folder.name
+    })
+  }
+  console.log(obj.files.length+" of files founded!");
+  await sendM(obj.files.length+" of files founded from "+url);
+ return obj;
+}
+
+
 app.get("/mega",async (req,res)=>{
    if(req.query.url!=null){
       var url=req.query.url.replace("***","#");
       if(validateUrl(url)){
-        cc=await loadMega(url);
+        cc=await loadMega2(url);
         cc.ok=true;
         res.send(
           JSON.stringify(cc)
