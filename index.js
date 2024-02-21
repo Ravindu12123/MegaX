@@ -317,7 +317,7 @@ app.get("/sendF",async (req,res)=>{
             ok:true,
             m:"file was sent"
              });
-      }else
+      }else{
         res.send(JSON.stringify({
             ok:false,
             m:"file cant send"
