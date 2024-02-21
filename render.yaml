@@ -1,0 +1,19 @@
+services:
+  - type: web
+    plan: free
+    name: megaX
+    env: nodejs
+    buildCommand: npm install
+    startCommand: npm start
+    repo:       
+    branch: master
+    envVars:
+      - key: token
+        sync: false
+      - key: pw
+        sync: false
+      - key: downloadPath
+        sync: false
+      - key: channel
+        sync: false
+    autoDeploy: false
