@@ -324,7 +324,7 @@ app.post("/sendF",async (req,res)=>{
       //dalp setting inported
      
      dalp=await async ()=>{
-     return new Promise((res)=>{
+     return new Promise((resss)=>{
              fol = File.fromURL(url+"/file/"+id);
     await fol.loadAttributes(async (error, ff) => {
     var ffpp=path.join(__dirname,dlp,ff.name);
@@ -343,7 +343,7 @@ stream.on('progress', info => {
     start
   }));
       }else{
-        res(ffpp);
+        resss(ffpp);
         console.log("dd done");
       }
     },5000);
