@@ -7,7 +7,7 @@ const app = express();
 const cors = require("cors");
 
 const corsOptions = {
-  origin:null,
+  origin:false,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",};
 app.use(cors(corsOptions));
 
