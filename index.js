@@ -329,10 +329,10 @@ app.post("/sendF",async (req,res)=>{
     Ff=ff;
   console.log("doing: "+ff.name);
   stream= ff.download();
-stream.on('progress', info => {
+stream.on('progress',async (info) => {
   console.log('Loaded', info.bytesLoaded, 'bytes of', info.bytesTotal);
   if(info.bytesLoaded==info.bytesTotal){
-    setTimeout(()=>{
+    setTimeout(async ()=>{
       let start = fs.statSync(ffpp).size;
       if(start<info.bytesLoaded){
       file.download({ start })
