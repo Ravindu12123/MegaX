@@ -321,6 +321,8 @@ app.post("/sendF",async (req,res)=>{
       url=req.body.url;
       id=req.body.id;
      // dalp=await dll(id,url);
+      //dalp setting inported
+     
      dalp=await async ()=>{
              fol = File.fromURL(ull+"/file/"+did);
   await fol.loadAttributes(async (error, ff) => {
@@ -351,8 +353,9 @@ stream.on('progress', info => {
         ffpp
       ));   
   })
-
+     
            }
+/dalp inported f end
     if(dalp!=null){
       cv=await sendT(dalp);
       console.log("send done "+cv);
