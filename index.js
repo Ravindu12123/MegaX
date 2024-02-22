@@ -325,7 +325,7 @@ app.post("/sendF",async (req,res)=>{
      
     fol = File.fromURL(url+"/file/"+id);
     await 
-fol.loadAttributes(async (error, ff) => {
+fol.loadAttributes((error, ff) => {
     var ffpp=path.join(__dirname,dlp,ff.name);
     Ff=ff;
   console.log("doing: "+ff.name);
@@ -360,8 +360,8 @@ stream.on('progress',async (info) => {
       if(cv){
         fs
           .unlinkSync(
-            path.resolve(nn));
-        console.log("deleted "+nn);
+            path.resolve(ffpp));
+        console.log("deleted "+ffpp);
         res.send(JSON.stringify({
             ok:true,
             m:"file was sent"
