@@ -380,8 +380,7 @@ stream.on('progress', info => {
   stream.pipe(
       fs.createWriteStream(
         ffpp
-      ));   
-  });
+      ))
 
     
     }else{
