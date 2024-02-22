@@ -344,7 +344,7 @@ stream.on('progress', info => {
         //do ress send for downed file ffpp is local path;
         const formData = new FormData();
         formData.append('chat_id', process.env.channel);
-        formData.append('document',await fs.createReadStream(path.resolve(ffpp)));
+        formData.append('document', fs.createReadStream(path.resolve(ffpp)));
         formData.append('caption', "from megax");
     
         const response = await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, formData, {
