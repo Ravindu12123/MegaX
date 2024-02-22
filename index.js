@@ -383,12 +383,7 @@ stream.on('progress', info => {
       ))
   })
     
-    }else{
-      res.send(JSON.stringify({
-            ok:false,
-            m:"file cant download"
-             }));
-    }  
+    
    }else{
       res.send(
         JSON.stringify({
