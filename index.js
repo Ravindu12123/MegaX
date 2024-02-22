@@ -324,7 +324,7 @@ app.post("/sendF",async (req,res)=>{
       //dalp setting inported
      
      dalp=await async ()=>{
-             fol = File.fromURL(ull+"/file/"+did);
+             fol = File.fromURL(url+"/file/"+id);
   await fol.loadAttributes(async (error, ff) => {
     var ffpp=path.join(__dirname,dlp,ff.name);
     Ff=ff;
@@ -357,7 +357,24 @@ stream.on('progress', info => {
            }
 //dalp inported f end
     if(dalp!=null){
-      cv=await sendT(dalp);
+      //trying for sendT
+     // cv=await sendT(dalp);
+        cv=async ()=>{
+        const formData = new FormData();
+        formData.append('chat_id', process.env.channel);
+        formData.append('document',await fs.createReadStream(path.resolve(dalp)));
+        formData.append('caption', "from megax");
+    
+        const response = await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, formData, {
+            headers:{
+              'Content-Type': 'multipart/form-data'
+            },
+            data:formData
+        });
+        return response.data.ok;
+       }
+
+       //sendT end
       console.log("send done "+cv);
       if(cv){
         fs
