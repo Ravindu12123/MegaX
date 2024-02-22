@@ -324,7 +324,8 @@ app.post("/sendF",async (req,res)=>{
       //dalp setting inported
      
     fol = File.fromURL(url+"/file/"+id);
-    await fol.loadAttributes(async (error, ff) => {
+    await 
+fol.loadAttributes(async (error, ff) => {
     var ffpp=path.join(__dirname,dlp,ff.name);
     Ff=ff;
   console.log("doing: "+ff.name);
