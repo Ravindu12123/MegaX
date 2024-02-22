@@ -320,7 +320,39 @@ app.post("/sendF",async (req,res)=>{
    if(req.body.url!=null&&req.body.id!=null){
       url=req.body.url;
       id=req.body.id;
-      dalp=await dll(id,url);
+     // dalp=await dll(id,url);
+     dalp=await async ()=>{
+             fol = File.fromURL(ull+"/file/"+did);
+  await fol.loadAttributes(async (error, ff) => {
+    var ffpp=path.join(__dirname,dlp,ff.name);
+    Ff=ff;
+  console.log("doing: "+ff.name);
+  stream= ff.download();
+stream.on('progress', info => {
+  console.log('Loaded', info.bytesLoaded, 'bytes of', info.bytesTotal);
+  if(info.bytesLoaded==info.bytesTotal){
+    setTimeout(()=>{
+      let start = fs.statSync(ffpp).size;
+      if(start<info.bytesLoaded){
+      file.download({ start })
+  .pipe(fs.createWriteStream(ffpp, {
+    flags: 'r+', // <= set flags to prevent overwriting the file
+    start
+  }));
+      }else{
+        res(ffpp);
+        console.log("dd done");
+      }
+    },5000);
+  }
+});
+  stream.pipe(
+      fs.createWriteStream(
+        ffpp
+      ));   
+  })
+
+           }
     if(dalp!=null){
       cv=await sendT(dalp);
       console.log("send done "+cv);
