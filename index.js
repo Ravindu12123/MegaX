@@ -5,14 +5,13 @@ const path = require("path");
 const express= require("express");
 const app = express();
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
-const corsOptions = {
-  "origin": "*",
-  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-  "preflightContinue": false,
-  "optionsSuccessStatus": 200
-};
-app.use(cors(corsOptions));
+app.use(cors());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 app.post('/p', cors(corsOptions), function (req, res, next) {
   res.json({msg: 'This is CORS-enabled for only example.com.'})
