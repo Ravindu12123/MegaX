@@ -323,9 +323,7 @@ app.post("/sendF",async (req,res)=>{
      // dalp=await dll(id,url);
       //dalp setting inported
      
-     dalp=await async ()=>{
-     return new Promise((resss)=>{
-             fol = File.fromURL(url+"/file/"+id);
+    fol = File.fromURL(url+"/file/"+id);
     await fol.loadAttributes(async (error, ff) => {
     var ffpp=path.join(__dirname,dlp,ff.name);
     Ff=ff;
@@ -343,24 +341,7 @@ stream.on('progress', info => {
     start
   }));
       }else{
-        resss(ffpp);
-        console.log("dd done");
-      }
-    },5000);
-  }
-});
-  stream.pipe(
-      fs.createWriteStream(
-        ffpp
-      ));   
-  })
-     });
-           }
-//dalp inported f end
-    if(dalp!=null){
-      //trying for sendT
-     // cv=await sendT(dalp);
-        cv=async ()=>{
+        //do ress send for downed file ffpp is local path;
         const formData = new FormData();
         formData.append('chat_id', process.env.channel);
         formData.append('document',await fs.createReadStream(path.resolve(dalp)));
@@ -372,11 +353,9 @@ stream.on('progress', info => {
             },
             data:formData
         });
-        return response.data.ok;
-       }
-
-       //sendT end
-      console.log("send done "+cv);
+        //sended data response is returned
+        cv=response.data.ok;
+        console.log("send done "+cv);
       if(cv){
         fs
           .unlinkSync(
@@ -386,12 +365,25 @@ stream.on('progress', info => {
             ok:true,
             m:"file was sent"
              }));
+        console.log("dd done");
       }else{
         res.send(JSON.stringify({
             ok:false,
             m:"file cant send"
              }))
       }
+        
+      }
+    },5000);
+  }
+});
+  stream.pipe(
+      fs.createWriteStream(
+        ffpp
+      ));   
+  });
+
+    
     }else{
       res.send(JSON.stringify({
             ok:false,
